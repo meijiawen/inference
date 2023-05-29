@@ -1,0 +1,4 @@
+service:
+    name: transfer-agent
+    description: 'transfer-agent'
+    internetAccess: false
