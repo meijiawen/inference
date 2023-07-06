@@ -1,7 +1,0 @@
-edition: 1.0.0 
-name: transfer-agent
-
-service:
-    name: transfer-agent
-    description: 'transfer-agent'
-    internetAccess: false
