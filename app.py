@@ -1,5 +1,4 @@
 from PIL import Image
-from typing import List
 from io import BytesIO
 
 import uvicorn
@@ -10,13 +9,9 @@ from inference import inferencer
 app = FastAPI()
 
 @app.post("/")
-async def root(files: List[UploadFile], response: Response):
-    if len(files) < 2:
-        response.status_code = 400
-        return "need mask image"
-
+async def root(files: UploadFile, response: Response):
     # 推理
-    inpainting_result = inferencer(Image.open(files[0].file), Image.open(files[1].file))
+    inpainting_result = inferencer(Image.open(files.file))
     
     if not isinstance(inpainting_result, Image.Image):
         response.status_code = 400
