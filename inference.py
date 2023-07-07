@@ -1,23 +1,22 @@
 
+import uuid
 from PIL import Image
 
-import numpy as np
-from mmpretrain.apis import ImageClassificationInferencer
+from mmagic.apis import MMagicInferencer
 
-model_name = "resnet50_8xb32_in1k"
+model_name = "deepfillv1"
 
-image_inferencer = ImageClassificationInferencer(model_name)
-
-def post_process(out):
-    out['pred_scores'] = out['pred_scores'].tolist()
-    return out
+agic_inferencer = MMagicInferencer(model_name)
 
 class Inferencer():
 
-    def __call__(self, image: Image.Image):
-        outputs = image_inferencer(np.asarray(image))
+    def __call__(self, image: Image.Image, mask: Image.Image) -> Image.Image:
+        image_path = str(uuid.uuid1()) + ".jpg"
+        image.save(image_path)
+        mask_path = str(uuid.uuid1()) + ".jpg"
+        mask.save(mask_path)
+        outputs = agic_inferencer.infer(img=image_path, mask=mask_path)
         
-        return [ post_process(out) for out in outputs]
-
+        return Image.fromarray(outputs[1].astype('uint8')).convert('RGB')
 
 inferencer = Inferencer()

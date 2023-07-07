@@ -1,6 +1,5 @@
+pandas
 mmcv==2.0.0
-mmpretrain
-mmpretrain[multimodal]
-mmengine
-
+mmagic
+accelerate
 python-multipart
