@@ -3,7 +3,9 @@ from PIL import Image
 
 import numpy as np
 from mmpretrain.apis import ImageClassificationInferencer
-
+import os
+value=os.environ.get('test')
+print(value)
 model_name = "resnet50_8xb32_in1k"
 
 image_inferencer = ImageClassificationInferencer(model_name)
