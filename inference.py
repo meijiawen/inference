@@ -25,7 +25,7 @@ class Inferencer():
         predicted_label = logits.argmax(-1).item()
         return self.model.config.id2label[predicted_label]
 
-
+inferencer = Inferencer()
 # dataset = load_dataset("huggingface/cats-image")
 # image = dataset["test"]["image"][0]
 # inferencer = ImageClassification()
