@@ -3,9 +3,10 @@ from PIL import Image
 import timm
 import torch
 
-# def post_process(out):
-#     out['pred_scores'] = out['pred_scores'].tolist()
-#     return out
+
+def post_process(out):
+    out['pred_scores'] = out['pred_scores'].tolist()
+    return out
 
 
 class Inferencer():
@@ -28,6 +29,7 @@ class Inferencer():
         top5_probabilities, top5_class_indices = torch.topk(
             output.softmax(dim=1) * 100, k=5)
         print(top5_probabilities, top5_class_indices)
+        return top5_probabilities, top5_class_indices
 
 
 inferencer = Inferencer()
