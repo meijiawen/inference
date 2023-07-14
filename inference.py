@@ -28,8 +28,10 @@ class Inferencer():
 
         top5_probabilities, top5_class_indices = torch.topk(
             output.softmax(dim=1) * 100, k=5)
-        print(top5_probabilities, top5_class_indices)
-        return top5_probabilities + top5_class_indices
+        print(output)
+        print("Sec step")
+        response = top5_probabilities.tolist()
+        return response
 
 
 inferencer = Inferencer()
