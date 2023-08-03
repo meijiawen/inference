@@ -18,7 +18,9 @@ class Inferencer():
 
     def __call__(self, image: Image.Image,**kwargs):
         outputs = image_inferencer(np.asarray(image))
-        
+        print("first normal arg:", image)
+        for key, value in kwargs.items():
+            print("{0} = {1}".format(key, value))
         return [ post_process(out) for out in outputs]
 
 
