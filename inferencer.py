@@ -7,6 +7,7 @@ from typing import Optional, List
 import numpy as np
 from mmdet.apis import DetInferencer
 
+
 det_inferencer = DetInferencer("mask-rcnn_r50_fpn_gn-all_2x_coco")
 
 
@@ -53,9 +54,7 @@ def array_to_base64(img_array):
 class Inferencer():
 
     def __call__(self, image: Image.Image, **kwargs) -> Image.Image:
-        print("first normal arg:", image)
-        for key, value in kwargs.items():
-            print("{0} = {1}".format(key, value))
+        print(kwargs)
         return_visualization = kwargs.pop("return_visualization", False)
         out = det_inferencer(np.array(image), return_vis=return_visualization)
         predictions = out['predictions'][0]
@@ -64,12 +63,11 @@ class Inferencer():
         if len(out['visualization']) > 0:
             vis = array_to_base64(out['visualization'][0])
 
-        return DetectionResult(labels=predictions['labels'],
-                               scores=predictions['scores'],
-                               bboxes=predictions['bboxes'],
-                               masks=predictions['masks'],
+        return DetectionResult(labels=predictions['labels'], 
+                               scores=predictions['scores'], 
+                               bboxes=predictions['bboxes'], 
+                               masks=predictions['masks'], 
                                poses=None,
                                visualization=vis)
-
 
 inferencer = Inferencer()
