@@ -16,7 +16,7 @@ def post_process(out):
 
 class Inferencer():
 
-    def __call__(self, image: Image.Image):
+    def __call__(self, image: Image.Image,**kwargs):
         outputs = image_inferencer(np.asarray(image))
         
         return [ post_process(out) for out in outputs]
