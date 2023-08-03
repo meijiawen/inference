@@ -10,7 +10,7 @@ det_inferencer = DetInferencer("faster-rcnn_r50-caffe-c4_1x_coco")
 
 class Inferencer():
 
-    def __call__(self, image: Image.Image) -> Image.Image:
+    def __call__(self, image: Image.Image,**kwargs) -> Image.Image:
         out = det_inferencer(np.array(image))
         return out
 
