@@ -3,3 +3,4 @@ mmcv==2.0.0
 mmagic
 accelerate
 python-multipart
+albumentations
